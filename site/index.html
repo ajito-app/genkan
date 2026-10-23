@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ajito</title>
+<meta name="description" content="Ajito is opening in January 2027.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="canonical" href="https://ajito.app/">
+<meta name="theme-color" content="#c9bda7">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ajito.app/">
+<meta property="og:title" content="ajito">
+<meta property="og:description" content="Opening January 2027.">
+<meta property="og:image" content="https://ajito.app/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="An indigo noren reading アジト in a doorway under a carved sign reading 準備中, Opening January 2027">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" as="image" href="/scene/master-3000.webp" type="image/webp" fetchpriority="high">
+<style>
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #c9bda7;
+}
+
+.scene {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+}
+
+.scene > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.scene.placed > img {
+  inset: auto;
+  object-fit: fill;
+}
+
+.scene::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 75% 80% at 50% 50%, transparent 55%, rgb(20 14 8 / 0.28) 100%);
+  pointer-events: none;
+}
+
+.strand {
+  position: absolute;
+  z-index: 1;
+  outline: none;
+}
+
+.glow {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.scene:has(.strand:hover) .glow,
+.scene:has(.strand:focus-visible) .glow {
+  opacity: 1;
+}
+
+.hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+</style>
+</head>
+<body>
+<h1 class="hidden">Ajito: opening January 2027</h1>
+
+<div class="scene" id="scene">
+  <img
+    id="shot"
+    src="/scene/master-3000.webp"
+    alt="An indigo noren reading アジト hangs in a doorway to a dark room, under a carved wooden sign reading 準備中, Opening January 2027"
+    fetchpriority="high">
+  <a class="strand" href="https://github.com/ajito-app" aria-label="Ajito on GitHub" data-strand="a">
+    <img class="glow" src="/scene/glow-a.webp" alt="">
+  </a>
+  <a class="strand" href="https://github.com/ajito-app" tabindex="-1" aria-hidden="true" data-strand="ji">
+    <img class="glow" src="/scene/glow-ji.webp" alt="">
+  </a>
+  <a class="strand" href="https://github.com/ajito-app" tabindex="-1" aria-hidden="true" data-strand="to">
+    <img class="glow" src="/scene/glow-to.webp" alt="">
+  </a>
+</div>
+
+<script>
+const IMAGE = { width: 6000, height: 3150 };
+const SAFE = { left: 0.3696, top: 0.1313, right: 0.6304, bottom: 0.9227 };
+const WIDTHS = [1500, 2250, 3000, 4500, 6000];
+const STRANDS = {
+  a: {
+    strand: { left: 0.42176, top: 0.3584, right: 0.4741, bottom: 0.7074 },
+    glyph: { x: 2566, y: 1547, w: 247, h: 270 },
+  },
+  ji: {
+    strand: { left: 0.4741, top: 0.3584, right: 0.5259, bottom: 0.7074 },
+    glyph: { x: 2876, y: 1540, w: 258, h: 276 },
+  },
+  to: {
+    strand: { left: 0.5259, top: 0.3584, right: 0.57824, bottom: 0.7074 },
+    glyph: { x: 3226, y: 1543, w: 185, h: 272 },
+  },
+};
+
+const scene = document.getElementById("scene");
+const shot = document.getElementById("shot");
+const links = document.querySelectorAll("[data-strand]");
+let loaded = 3000;
+
+function place() {
+  const w = innerWidth;
+  const h = innerHeight;
+
+  const safeW = (SAFE.right - SAFE.left) * IMAGE.width;
+  const safeH = (SAFE.bottom - SAFE.top) * IMAGE.height;
+  const fit = Math.min(w / safeW, h / safeH);
+  const cover = Math.max(w / IMAGE.width, h / IMAGE.height);
+  const scale = Math.max(fit, cover);
+
+  const drawnW = IMAGE.width * scale;
+  const drawnH = IMAGE.height * scale;
+  const centerX = ((SAFE.left + SAFE.right) / 2) * drawnW;
+  const centerY = ((SAFE.top + SAFE.bottom) / 2) * drawnH;
+  const left = Math.min(0, Math.max(w - drawnW, w / 2 - centerX));
+  const top = Math.min(0, Math.max(h - drawnH, h / 2 - centerY));
+
+  shot.style.width = `${drawnW}px`;
+  shot.style.height = `${drawnH}px`;
+  shot.style.left = `${left}px`;
+  shot.style.top = `${top}px`;
+  scene.classList.add("placed");
+
+  for (const link of links) {
+    const { strand, glyph } = STRANDS[link.dataset.strand];
+    const x = left + strand.left * drawnW;
+    const y = top + strand.top * drawnH;
+    link.style.left = `${x}px`;
+    link.style.top = `${y}px`;
+    link.style.width = `${(strand.right - strand.left) * drawnW}px`;
+    link.style.height = `${(strand.bottom - strand.top) * drawnH}px`;
+
+    const glow = link.querySelector(".glow");
+    glow.style.left = `${left + (glyph.x / IMAGE.width) * drawnW - x}px`;
+    glow.style.top = `${top + (glyph.y / IMAGE.height) * drawnH - y}px`;
+    glow.style.width = `${(glyph.w / IMAGE.width) * drawnW}px`;
+    glow.style.height = `${(glyph.h / IMAGE.height) * drawnH}px`;
+  }
+
+  const needed = drawnW * (devicePixelRatio || 1);
+  const best = WIDTHS.find((width) => width >= needed) ?? WIDTHS[WIDTHS.length - 1];
+  if (best > loaded) {
+    loaded = best;
+    const next = new Image();
+    next.src = `/scene/master-${best}.webp`;
+    next.decode().then(() => {
+      if (loaded === best) shot.src = next.src;
+    }).catch(() => {});
+  }
+}
+
+place();
+addEventListener("resize", place);
+</script>
+</body>
+</html>
