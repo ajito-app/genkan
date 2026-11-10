@@ -549,8 +549,8 @@ def build_sign():
     cutters = bpy.data.collections.new("carving")
     bpy.context.scene.collection.children.link(cutters)
     for obj in (
-        carving("準備中", "ShipporiMinchoB1-Bold.ttf", 0.05, band_middle + 0.058, front, gold, 1.35),
-        carving("Opening January 2027", "ShipporiMinchoB1-ExtraBold.ttf", 0.085, band_middle - 0.03, front, gold),
+        carving("近日公開", "ShipporiMinchoB1-Bold.ttf", 0.05, band_middle + 0.058, front, gold, 1.35),
+        carving("Going public soon", "ShipporiMinchoB1-ExtraBold.ttf", 0.085, band_middle - 0.03, front, gold),
     ):
         for collection in obj.users_collection:
             collection.objects.unlink(obj)

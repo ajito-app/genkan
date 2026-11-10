@@ -4,20 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ajito</title>
-<meta name="description" content="Ajito is opening in January 2027.">
+<meta name="description" content="Ajito is going public soon.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="canonical" href="https://ajito.app/">
 <meta name="theme-color" content="#c9bda7">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ajito.app/">
 <meta property="og:title" content="ajito">
-<meta property="og:description" content="Opening January 2027.">
+<meta property="og:description" content="Going public soon.">
 <meta property="og:image" content="https://ajito.app/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="An indigo noren reading アジト in a doorway under a carved sign reading 準備中, Opening January 2027">
+<meta property="og:image:alt" content="An indigo noren reading アジト in a doorway under a carved sign reading 近日公開, Going public soon">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preload" as="image" href="/scene/master-3000.webp" type="image/webp" fetchpriority="high">
+<link rel="preload" as="image" href="/scene/master-3000.webp?v=2" type="image/webp" fetchpriority="high">
 <style>
 html,
 body {
@@ -84,22 +84,22 @@ body {
 </style>
 </head>
 <body>
-<h1 class="hidden">Ajito: opening January 2027</h1>
+<h1 class="hidden">Ajito: going public soon</h1>
 
 <div class="scene" id="scene">
   <img
     id="shot"
-    src="/scene/master-3000.webp"
-    alt="An indigo noren reading アジト hangs in a doorway to a dark room, under a carved wooden sign reading 準備中, Opening January 2027"
+    src="/scene/master-3000.webp?v=2"
+    alt="An indigo noren reading アジト hangs in a doorway to a dark room, under a carved wooden sign reading 近日公開, Going public soon"
     fetchpriority="high">
   <a class="strand" href="https://github.com/ajito-app" aria-label="Ajito on GitHub" data-strand="a">
-    <img class="glow" src="/scene/glow-a.webp" alt="">
+    <img class="glow" src="/scene/glow-a.webp?v=2" alt="">
   </a>
   <a class="strand" href="https://github.com/ajito-app" tabindex="-1" aria-hidden="true" data-strand="ji">
-    <img class="glow" src="/scene/glow-ji.webp" alt="">
+    <img class="glow" src="/scene/glow-ji.webp?v=2" alt="">
   </a>
   <a class="strand" href="https://github.com/ajito-app" tabindex="-1" aria-hidden="true" data-strand="to">
-    <img class="glow" src="/scene/glow-to.webp" alt="">
+    <img class="glow" src="/scene/glow-to.webp?v=2" alt="">
   </a>
 </div>
 
@@ -171,7 +171,7 @@ function place() {
   if (best > loaded) {
     loaded = best;
     const next = new Image();
-    next.src = `/scene/master-${best}.webp`;
+    next.src = `/scene/master-${best}.webp?v=2`;
     next.decode().then(() => {
       if (loaded === best) shot.src = next.src;
     }).catch(() => {});
